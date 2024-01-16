@@ -64,10 +64,14 @@ app.get('/signin', (req, res) => {
 app.post('/signin', async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await userRepo.getOneBy({ email, password });
+  const user = await userRepo.getOneBy({ email });
 
   if (!user) { 
     return res.send('Account not found');
+  }
+
+  if (user.password !== password) {
+    return res.send('Invalid password');
   }
 
   req.session.userId = user.id;
