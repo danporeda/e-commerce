@@ -10,7 +10,7 @@ app.use(cookieSession({
   keys: ['jdshjkdhfjkdfkskll']
 }))
 
-app.get('/', (req, res) => {
+app.get('/signup', (req, res) => {
   res.send(`
     <div>
       Your User ID: ${req.session.userId}
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.post('/', async (req, res) => {
+app.post('/signup', async (req, res) => {
   const { email, password, passwordConfirmation } = req.body;
 
   const existingUser = await userRepo.getOneBy({ email });
@@ -43,6 +43,37 @@ app.post('/', async (req, res) => {
 
   res.send('Account Created!!');
 });
+
+app.get('/signout', (req, res) => {
+  req.session = null;
+  res.send('You are logged out');
+});
+
+app.get('/signin', (req, res) => {
+  res.send(`
+    <div>
+      <form method="POST">
+        <input name="email" placeholder="email" />
+        <input name="password" placeholder="password" />
+        <button>Sign In</button>
+      </form>
+    </div>
+  `);
+});
+
+app.post('/signin', async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await userRepo.getOneBy({ email, password });
+
+  if (!user) { 
+    return res.send('Account not found');
+  }
+
+  req.session.userId = user.id;
+
+  return res.send('Logged in, Bucko!');
+})
 
 app.listen(3000, () => {
   console.log('Listening');
