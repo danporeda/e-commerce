@@ -17,7 +17,11 @@ router.post(
   [requireEmail, requirePassword, requirePasswordConfirmation],
   async (req, res) => {
     const errors = validationResult(req);
-    console.log(errors);
+    
+    if (!errors.isEmpty()) {
+      console.log(errors);
+      return res.send(signupTemplate({ req, errors }));
+    }
 
     const { email, password } = req.body;
     const user = await usersRepo.create({ email, password });
@@ -37,22 +41,40 @@ router.get('/signin', (req, res) => {
   res.send(signinTemplate());
 });
 
-router.post('/signin', async (req, res) => {
-  const { email, password } = req.body;
+router.post('/signin', [
+  check('email')
+    .trim()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Must provide a valid email')
+    .custom(async (email) => {
+      const user = await usersRepo.getOneBy({ email });
+      if (!user) {
+        throw new Error('email not found!');
+      }
+    }),
+  check('password')
+    .trim()
+    .custom(async (password, { req }) => {
+      const user = await usersRepo.getOneBy({ email: req.body.email });
+      if (!user) {
+        throw new Error('Invalid password');
+      }
+      const validPassword = await usersRepo.comparePasswords(
+        user.password,
+        password
+      );
+      if (!validPassword) {
+        throw new Error('Invalid password');
+      }
+    })
+], async (req, res) => {
+  const errors = validationResult(req);
+  console.log(errors);
+
+  const { email } = req.body;
 
   const user = await usersRepo.getOneBy({ email });
-
-  if (!user) { 
-    return res.send('Account not found');
-  }
-
-  const validPassword = await usersRepo.comparePasswords(
-    user.password, 
-    password
-  );
-  if (!validPassword) {
-    return res.send('Invalid password');
-  }
 
   req.session.userId = user.id;
 
