@@ -30,6 +30,6 @@ class UsersRepository extends Repository {
 
     return hashed === suppliedBuffer.toString('hex');
   }
-}
+};
 
 module.exports = new UsersRepository('users.json');
