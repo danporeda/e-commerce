@@ -31,5 +31,20 @@
     "email": "shittyfuck@ducky.com",
     "password": "47d836ae7091301083611ca1cf6725be0c57074a3be01ea2b5c43c31e7b4d35ed24af682b487ea029851e7c56d3efde7b51b286765992244a3988173537dc5ce.28ae1602d4db2395",
     "id": "f386b279"
+  },
+  {
+    "email": "test10@test.com",
+    "password": "cdf75b699dc36bf40672105c696e7a785c118984d288c38f5876cffb0d675f314b8d1bb9eadb19def96c69dd0c3022f6cc3d2bec86ae3a38bf6964d7d558de89.8491268113390125",
+    "id": "7c79088a"
+  },
+  {
+    "email": "test1@gmail.com",
+    "password": "5501ddae2e454d603b8d1aba379e0b61072edda4aa63186a1f3bc57b48f531b3282fafa2f3abbdd6c64f3d5cc0d100bcde600523a513dc8492ded97ac52a6750.9282dee6834c1d99",
+    "id": "4a8539a7"
+  },
+  {
+    "email": "hello@gmail.com",
+    "password": "1bbdb28d88eb62968e470f83db4a8c734c8c9cfc2cd9f32b5ebc82c3a8f863e9d871c0f797346d5266bd847931f0ea2785a922a088a8999813c22d41e217dd8a.3825c31a6edba5ad",
+    "id": "3a33b057"
   }
 ]
