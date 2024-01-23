@@ -1,7 +1,7 @@
 const fs = require('fs');
 const crypto = require('crypto');
 
-module.export = class Repository {
+module.exports = class Repository {
   constructor(filename) {
     if (!filename) {
       throw new Error('Creating a repository requires a filename');
@@ -13,7 +13,7 @@ module.export = class Repository {
     } catch (err) {
       fs.writeFileSync(this.filename, '[]');
     }
-  }
+  };
 
   async create(attrs) {
     attrs.id = this.randomId();
@@ -23,7 +23,7 @@ module.export = class Repository {
     await this.writeAll(records);
 
     return attrs;
-  }
+  };
 
   async getAll() {
     return JSON.parse(
@@ -31,29 +31,29 @@ module.export = class Repository {
         encoding: 'utf8'
       })
     );
-  }
+  };
 
   async writeAll(records) {
     await fs.promises.writeFile(
       this.filename, 
       JSON.stringify(records, null, 2)
     );
-  }
+  };
 
   randomId() {
     return crypto.randomBytes(4).toString('hex');
-  }
+  };
 
   async getOne(id) {
     const records = await this.getAll();
     return records.find(record => record.id === id);
-  }
+  };
 
   async delete(id) {
     const records = await this.getAll();
     const filteredRecords = records.filter(record => record.id !== id);
     await this.writeAll(filteredRecords);
-  }
+  };
 
   async update(id, attrs) {
     const records = await this.getAll();
@@ -65,7 +65,7 @@ module.export = class Repository {
 
     Object.assign(record, attrs);
     await this.writeAll(records);
-  }
+  };
 
   async getOneBy(filters) {
     const records = await this.getAll();
@@ -83,5 +83,5 @@ module.export = class Repository {
         return record;
       }
     }
-  }
+  } 
 }
