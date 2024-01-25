@@ -34,11 +34,12 @@ router.post(
 
 router.get('/signout', (req, res) => {
   req.session = null;
-  res.send('You are logged out');
+  
+  res.redirect('/signin');
 });
 
 router.get('/signin', (req, res) => {
-  res.send(signinTemplate({}));
+  res.send(signinTemplate({ req }));
 });
 
 router.post(

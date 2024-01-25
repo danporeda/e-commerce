@@ -1,7 +1,7 @@
 const layout = require('../layout');
-const { getError } = require('../../helpers');
+const { getError, loggedOut } = require('../../helpers');
 
-module.exports = ({ errors }) => {
+module.exports = ({ errors, req }) => {
   return layout({
     content: `
       <div class="container">
@@ -9,6 +9,7 @@ module.exports = ({ errors }) => {
           <div class="column is-one-quarter">
             <form method="POST">
               <h1 class="title">Sign in</h1>
+              <p class="help is-danger">${loggedOut(req)}</p>
               <div class="field">
                 <label class="label">Email</label>
                 <input required class="input" placeholder="Email" name="email" />
