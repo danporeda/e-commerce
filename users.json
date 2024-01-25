@@ -51,5 +51,10 @@
     "email": "test2@gmail.com",
     "password": "66de2d9d8d9f6a1b7204790188ba5f38e290d1b6d7c2bc7432bbae91279bf6833ada3f1226e6c1ae10585c9c0a4a0063cc4a8cfb878d9f2236b96f367e73c248.0e2de0501a1bbdfe",
     "id": "4cd9e3fc"
+  },
+  {
+    "email": "test5@test.com",
+    "password": "37d7f89af057c8f1f7a6b34a2c3513770511ca0bfc9290a6172d3c46785e7bd2bd52eeb082c323c12e80e0311efd8b287d8fb67535547bd4ad467863586da1f8.2c5b0b50b99049fe",
+    "id": "2eaf74b7"
   }
 ]
