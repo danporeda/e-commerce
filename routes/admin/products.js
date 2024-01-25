@@ -57,7 +57,11 @@ router.post('/admin/products/:id/edit',
       changes.image = req.file.buffer.toString('base64');
     }
 
+    try {
     await ProductsRepo.update(req.params.id, changes);
+    } catch (err) {
+      return res.send('Could not find item');
+    }
 })
 
 module.exports = router;
