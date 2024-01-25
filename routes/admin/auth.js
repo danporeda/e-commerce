@@ -28,7 +28,7 @@ router.post(
 
     req.session.userId = user.id;
 
-    res.send('Account Created!!');
+    res.redirect('/admin/products');
   }
 );
 
@@ -52,7 +52,7 @@ router.post(
 
     req.session.userId = user.id;
 
-    return res.send('Logged in, Bucko!');
+    res.redirect('/admin/products');
 })
 
 module.exports = router;
